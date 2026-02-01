@@ -49,6 +49,10 @@ export class ApiService {
     return this.http.post<void>(`${this.baseUrl}/schedule/${slotId}/reschedule`, {});
   }
 
+  moveSlot(slotId: number, day: string): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/schedule/${slotId}/move`, { day });
+  }
+
   deleteSlot(slotId: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/schedule/${slotId}`);
   }

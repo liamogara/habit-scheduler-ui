@@ -1,10 +1,11 @@
 import { Component, OnInit, signal } from '@angular/core';
+import { CdkDropList, CdkDrag, CdkDropListGroup, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { ApiService } from '../../services/api.service';
 import { ScheduleSlot } from '../../models/schedule-slot.model';
 
 @Component({
   selector: 'app-schedule',
-  imports: [],
+  imports: [CdkDropList, CdkDrag, CdkDropListGroup],
   templateUrl: './schedule.html',
 })
 export class Schedule implements OnInit {
@@ -53,6 +54,10 @@ export class Schedule implements OnInit {
     this.api.reschedule(slotId).subscribe(() => this.load());
   }
 
+  move(slotId: number, day: string) {
+    this.api.moveSlot(slotId, day).subscribe(() => this.load());
+  }
+
   complete(slotId: number) {
     this.api.markCompleted(slotId).subscribe(() => this.load());
   }
@@ -63,6 +68,16 @@ export class Schedule implements OnInit {
 
   clearSchedule() {
     this.api.clearSchedule().subscribe(() => this.load());
+  }
+
+  onDrop(event: CdkDragDrop<ScheduleSlot[]>, day: string) {
+    if (event.previousContainer === event.container) {
+      return;
+    }
+
+    const slot = event.item.data as ScheduleSlot;
+
+    this.api.moveSlot(slot.id, day).subscribe(() => this.load());
   }
 
   getStatusColor(status: number): string {
