@@ -6,16 +6,17 @@ import { Habit } from '../../models/habit.model';
   selector: 'app-habits',
   imports: [],
   templateUrl: './habits.html',
-  styleUrl: './habits.css',
 })
 export class Habits implements OnInit {
+  loading = signal<boolean>(true);
   habits = signal<Habit[]>([]);
 
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
-    this.api.getHabits().subscribe(data => {
+    this.api.getHabits().subscribe((data) => {
       this.habits.set(data);
+      this.loading.set(false);
     });
   }
 }

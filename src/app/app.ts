@@ -6,8 +6,22 @@ import { Schedule } from './components/schedule/schedule';
   selector: 'app-root',
   imports: [Habits, Schedule],
   templateUrl: './app.html',
-  styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('habit-scheduler-ui');
+  dark = signal<boolean>(
+    localStorage['theme'] === 'dark' ||
+      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches),
+  );
+
+  constructor() {
+    document.documentElement.classList.toggle('dark', this.dark());
+  }
+
+  protected readonly title = signal('Habit Scheduler');
+
+  toggleTheme() {
+    document.documentElement.classList.toggle('dark');
+    localStorage['theme'] = this.dark() ? 'light' : 'dark';
+    this.dark.set(!this.dark());
+  }
 }

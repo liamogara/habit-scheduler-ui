@@ -1,16 +1,18 @@
-<div class = "app-shell">
-    <header class="app-header">
-        <h1>Habit Scheduler</h1>
-        <p>Schedule habits...</p>
-    </header>
-    
-    <main class="content-grid">
-        <section class="card">
-            <app-habits></app-habits>
-        </section>
+<div
+  class="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors">
 
-        <section class="card">
-            <app-schedule></app-schedule>
-        </section>
-    </main>
+  <header class="flex justify-between items-center px-6 py-4 border-b border-slate-200 dark:border-slate-700">
+    <h1 class="text-xl font-semibold">Habit Scheduler</h1>
+
+    <button
+      class="text-sm px-3 py-1 rounded-md border hover:bg-slate-200 dark:hover:bg-slate-700"
+      (click)="toggleTheme()">
+      {{ dark() ? 'Light mode' : 'Dark mode' }}
+    </button>
+  </header>
+
+  <main class="p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <app-habits />
+    <app-schedule class="lg:col-span-2" />
+  </main>
 </div>

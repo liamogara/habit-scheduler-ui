@@ -1,14 +1,22 @@
-<h2 class="section-title">Habits</h2>
+<div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm p-4">
+  <h2 class="text-lg font-medium mb-4">Habits</h2>
 
-<ul class="habit-list">
-    @for (habit of habits(); track habit.id) {
-        <li class="habit-item">
-            <div>
-                <strong>{{ habit.name }}</strong>
-                <span class="meta">
-                    {{ habit.frequencyPerWeek }}x / week
-                </span>
-            </div>
+  @if (loading()) {
+    <div class="space-y-2 animate-pulse">
+      <div class="h-8 bg-slate-200 dark:bg-slate-700 rounded"></div>
+      <div class="h-8 bg-slate-200 dark:bg-slate-700 rounded"></div>
+      <div class="h-8 bg-slate-200 dark:bg-slate-700 rounded"></div>
+    </div>
+  } @else {
+    <ul class="space-y-2">
+      @for (habit of habits(); track habit.id) {
+        <li
+          class="flex justify-between items-center px-3 py-2 rounded-md bg-slate-50 dark:bg-slate-700">
+          <span class="font-medium">{{ habit.name }}</span>
+          <span class="text-xs text-slate-500">{{ habit.frequencyPerWeek }}/week</span>
         </li>
-    }
-</ul>
+      }
+    </ul>
+  }
+</div>
+
