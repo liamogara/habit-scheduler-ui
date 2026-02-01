@@ -1,1 +1,14 @@
-<p>schedule works!</p>
+<h2>Weekly Schedule</h2>
+<button (click)="createSchedule()">
+    Create Schedule
+</button>
+<ul>
+    @for (slot of slots(); track slot.id) {
+        <li>
+            {{ slot.date }} {{ slot.startTime }} - {{ slot.habitName }}
+            @if (slot.status == 0) {
+                <button (click)="miss(slot.id)">Miss</button>
+            }
+        </li>
+    }
+</ul>

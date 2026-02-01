@@ -1,1 +1,6 @@
-<p>habits works!</p>
+<h2>Habits</h2>
+<ul>
+    @for (habit of habits(); track habit.id) {
+        <li>{{ habit.name }} ({{ habit.frequencyPerWeek }}/week)</li>
+    }
+</ul>

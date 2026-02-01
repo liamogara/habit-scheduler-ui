@@ -3,7 +3,7 @@ export interface ScheduleSlot {
     date: string;
     startTime: string;
     durationMinutes: number;
-    status: string;
+    status: number;
 
     habitId: number;
     habitName: string;
