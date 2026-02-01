@@ -9,6 +9,7 @@ import { ScheduleSlot } from '../../models/schedule-slot.model';
   styleUrl: './schedule.css',
 })
 export class Schedule implements OnInit {
+  loading = signal<boolean>(true);
   slots = signal<ScheduleSlot[]>([]);
 
   constructor(private api: ApiService) {}
@@ -22,8 +23,10 @@ export class Schedule implements OnInit {
   }
 
   load() {
+    this.loading.set(true);
     this.api.getSchedule().subscribe((data) => {
       this.slots.set(data);
+      this.loading.set(false);
     });
   }
 

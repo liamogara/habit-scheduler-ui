@@ -4,8 +4,15 @@
         Create Schedule
     </button>
 </div>
+@if (loading()) {
+    <div class="skeleton-list">
+    @for (i of [1,2,3,4]; track i) {
+        <div class="skeleton-slot"></div>
+    }
+</div>
 
-<div class="schedule-list">
+} @else {
+    <div class="schedule-list">
     @for (slot of slots(); track slot.id) {
         <div class="slot">
             <div class="slot-info">
@@ -18,3 +25,4 @@
         </div>
     }
 </div>
+}
