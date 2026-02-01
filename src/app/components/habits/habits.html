@@ -1,6 +1,14 @@
-<h2>Habits</h2>
-<ul>
+<h2 class="section-title">Habits</h2>
+
+<ul class="habit-list">
     @for (habit of habits(); track habit.id) {
-        <li>{{ habit.name }} ({{ habit.frequencyPerWeek }}/week)</li>
+        <li class="habit-item">
+            <div>
+                <strong>{{ habit.name }}</strong>
+                <span class="meta">
+                    {{ habit.frequencyPerWeek }}x / week
+                </span>
+            </div>
+        </li>
     }
 </ul>
