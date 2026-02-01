@@ -11,7 +11,7 @@ export class Schedule implements OnInit {
   loading = signal<boolean>(true);
   slots = signal<ScheduleSlot[]>([]);
 
-  days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  days = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
   grouped = signal<Record<string, any[]>>({});
 
   constructor(private api: ApiService) {}
@@ -69,5 +69,15 @@ export class Schedule implements OnInit {
     if (status === 1) return "#22C55E";
     if (status === 2) return "#ef4444";
     return "#3B82F6";
+  }
+
+  formatTime(time: string): string {
+    const dateTimeString = `1970-01-01T${time}`;
+    const dateObject = new Date(dateTimeString);
+
+    return dateObject.toLocaleTimeString(navigator.language, {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true});
   }
 }

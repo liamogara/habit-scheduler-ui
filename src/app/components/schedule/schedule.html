@@ -43,7 +43,7 @@
                         ✕
                     </button>
                 </div>
-                <div class="text-xs text-stone-500">{{ slot.startTime }}</div>
+                <div class="text-xs text-stone-500">{{ formatTime(slot.startTime) }}</div>
                 
                 @if (slot.status === 0) {
                     <div
