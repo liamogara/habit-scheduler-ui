@@ -1,22 +1,106 @@
-<div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm p-4">
-  <h2 class="text-lg font-medium mb-4">Habits</h2>
+<div class="bg-white dark:bg-stone-800 rounded-lg shadow-sm p-4">
+    <h2 class="text-lg font-medium mb-4">Habits</h2>
+    <div class="mb-4 p-2 bg-stone-200 dark:bg-stone-700 rounded">
+    <form
+    class="mb-4 flex flex-col gap-2"
+    (ngSubmit)="createHabit()">
 
-  @if (loading()) {
-    <div class="space-y-2 animate-pulse">
-      <div class="h-8 bg-slate-200 dark:bg-slate-700 rounded"></div>
-      <div class="h-8 bg-slate-200 dark:bg-slate-700 rounded"></div>
-      <div class="h-8 bg-slate-200 dark:bg-slate-700 rounded"></div>
+    <label for="name" class="flex justify-between">
+        <p class="pr-4">Name:</p>
+        <input
+            class="flex-1 px-3 py-2 rounded-md border dark:bg-stone-800"
+            placeholder="Habit name"
+            [(ngModel)]="newHabit.name"
+            name="name" />
+    </label>
+
+    <label for="freq" class="flex justify-between">
+        <p class="pr-4">Frequency:</p>
+    <input
+        type="number"
+        min="1"
+        max="7"
+        class="w-20 px-2 rounded-md border dark:bg-stone-800"
+        placeholder="1"
+        [(ngModel)]="newHabit.frequencyPerWeek"
+        name="freq" />
+    </label>
+    <label for="duration" class="flex justify-between">
+        <p class="pr-4">Duration(min):</p>
+    <input
+        type="number"
+        min="0"
+        max="120"
+        class="w-20 px-2 rounded-md border dark:bg-stone-800"
+        placeholder="1"
+        [(ngModel)]="newHabit.minDurationMinutes"
+        name="duration" />
+    </label>
+    <label for="start" class="flex justify-between">
+        <p class="pr-4">Start(hour):</p>
+        <input
+            type="number"
+            min="0"
+            max="23"
+            class="w-20 px-2 rounded-md border dark:bg-stone-800"
+            placeholder="1"
+            [(ngModel)]="newHabit.startHour"
+            name="start" />
+    </label>
+    <label for="end" class="flex justify-between">
+        <p class="pr-4">End(hour):</p>
+    <input
+        type="number"
+        min="1"
+        max="24"
+        class="w-20 px-2 rounded-md border dark:bg-stone-800"
+        placeholder="1"
+        [(ngModel)]="newHabit.endHour"
+        name="end" />
+    </label>
+
+
+    <button
+        class="px-4 py-2 bg-emerald-800 text-white rounded-md hover:bg-emerald-500">
+        Add
+    </button>
+        </form>
+        </div>
+
+
+    @if (loading()) {
+        <div class="space-y-2 animate-pulse">
+        <div class="h-8 bg-stone-200 dark:bg-stone-700 rounded"></div>
+        <div class="h-8 bg-stone-200 dark:bg-stone-700 rounded"></div>
+        <div class="h-8 bg-stone-200 dark:bg-stone-700 rounded"></div>
+        </div>
+    } @else {
+        <ul class="space-y-2">
+        @for (habit of habits(); track habit.id) {
+            <li class="flex justify-between items-center px-3 py-2 rounded-md bg-stone-50 dark:bg-stone-700">
+                <span class="font-medium">{{ habit.name }}</span>
+                <div class="flex justify-between">
+                    <p class="text-xs text-stone-500 pr-2">{{ habit.frequencyPerWeek }}/week</p>
+                    <button
+                        class="text-xs text-stone-400 hover:text-red-500"
+                        (click)="delete(habit.id)">
+                        ✕
+                    </button>
+                </div>
+            </li>
+        }
+        </ul>
+    }
+
+
+    <div class="flex justify-center items-center py-2">
+        <button
+            class="px-4 py-2 bg-red-800 text-white rounded-md hover:bg-red-500"
+            (click)="clearHabits()"
+            [disabled]="habits.length !== 0">
+            Clear Habits
+        </button>
     </div>
-  } @else {
-    <ul class="space-y-2">
-      @for (habit of habits(); track habit.id) {
-        <li
-          class="flex justify-between items-center px-3 py-2 rounded-md bg-slate-50 dark:bg-slate-700">
-          <span class="font-medium">{{ habit.name }}</span>
-          <span class="text-xs text-slate-500">{{ habit.frequencyPerWeek }}/week</span>
-        </li>
-      }
-    </ul>
-  }
+
 </div>
 

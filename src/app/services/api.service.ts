@@ -17,8 +17,16 @@ export class ApiService {
     return this.http.get<Habit[]>(`${this.baseUrl}/habit`);
   }
 
-  createHabit(habit: Partial<Habit>): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/habit`, habit);
+  createHabit(habit: Partial<Habit>): Observable<Habit> {
+    return this.http.post<Habit>(`${this.baseUrl}/habit`, habit);
+  }
+
+  deleteHabit(habitId: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/habit/${habitId}`);
+  }
+
+  clearHabits(): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/habit/habits`);
   }
 
   createSchedule(): Observable<void> {
@@ -31,5 +39,17 @@ export class ApiService {
 
   markMissed(slotId: number): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}/schedule/${slotId}/miss`, {});
+  }
+
+  markCompleted(slotId: number): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/schedule/${slotId}/complete`, {});
+  }
+
+  deleteSlot(slotId: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/schedule/${slotId}`);
+  }
+
+  clearSchedule(): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/schedule/week`);
   }
 }

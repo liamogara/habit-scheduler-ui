@@ -48,4 +48,22 @@ export class Schedule implements OnInit {
   miss(slotId: number) {
     this.api.markMissed(slotId).subscribe(() => this.load());
   }
+
+  complete(slotId: number) {
+    this.api.markCompleted(slotId).subscribe(() => this.load());
+  }
+
+  delete(slotId: number) {
+    this.api.deleteSlot(slotId).subscribe(() => this.load());
+  }
+
+  clearSchedule() {
+    this.api.clearSchedule().subscribe(() => this.load());
+  }
+
+  getStatusColor(status: number): string {
+    if (status === 1) return "#22C55E";
+    if (status === 2) return "#ef4444";
+    return "#3B82F6";
+  }
 }
