@@ -45,22 +45,33 @@
                 </div>
                 <div class="text-xs text-stone-500">{{ slot.startTime }}</div>
                 
-                <div
-                class="flex justify-between items-center px-3 py-2 rounded-md bg-stone-50 dark:bg-stone-700">
+                @if (slot.status === 0) {
+                    <div
+                    class="flex justify-between items-center px-3 py-2 rounded-md bg-stone-50 dark:bg-stone-700">
+                        <button
+                            class="text-xs text-green-500 hover:underline disabled:opacity-40"
+                            [disabled]="slot.status !== 0"
+                            (click)="complete(slot.id)">
+                            Complete
+                        </button>
+                        
+                        <button
+                            class="text-xs text-red-500 hover:underline disabled:opacity-40"
+                            [disabled]="slot.status !== 0"
+                            (click)="miss(slot.id)">
+                            Miss
+                        </button>
+                    </div>
+                } 
+                @if (slot.status === 2) {
                     <button
                         class="text-xs text-green-500 hover:underline disabled:opacity-40"
-                        [disabled]="slot.status !== 0"
-                        (click)="complete(slot.id)">
-                        Complete
+                        [disabled]="slot.status !== 2"
+                        (click)="reschedule(slot.id)">
+                        Reschedule
                     </button>
-                    
-                    <button
-                        class="text-xs text-red-500 hover:underline disabled:opacity-40"
-                        [disabled]="slot.status !== 0"
-                        (click)="miss(slot.id)">
-                        Miss
-                    </button>
-                </div>
+                }
+
             </div>
           }
         </div>

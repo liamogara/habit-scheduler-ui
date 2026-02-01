@@ -49,6 +49,10 @@ export class Schedule implements OnInit {
     this.api.markMissed(slotId).subscribe(() => this.load());
   }
 
+  reschedule(slotId: number) {
+    this.api.reschedule(slotId).subscribe(() => this.load());
+  }
+
   complete(slotId: number) {
     this.api.markCompleted(slotId).subscribe(() => this.load());
   }
