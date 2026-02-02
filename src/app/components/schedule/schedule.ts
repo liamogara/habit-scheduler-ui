@@ -1,14 +1,19 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { CdkDropList, CdkDrag, CdkDropListGroup, CdkDragDrop } from '@angular/cdk/drag-drop';
+import { CdkDropList, CdkDrag, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { ApiService } from '../../services/api.service';
+import { Habit } from '../../models/habit.model';
 import { ScheduleSlot } from '../../models/schedule-slot.model';
+import { LucideAngularModule, Trash, CalendarPlus, CalendarSync} from 'lucide-angular';
 
 @Component({
   selector: 'app-schedule',
-  imports: [CdkDropList, CdkDrag, CdkDropListGroup],
+  imports: [CdkDropList, CdkDrag, LucideAngularModule],
   templateUrl: './schedule.html',
 })
 export class Schedule implements OnInit {
+  readonly Trash = Trash;
+  readonly CalendarPlus = CalendarPlus;
+  readonly CalendarSync = CalendarSync;
   loading = signal<boolean>(true);
   slots = signal<ScheduleSlot[]>([]);
 
@@ -75,15 +80,21 @@ export class Schedule implements OnInit {
       return;
     }
 
-    const slot = event.item.data as ScheduleSlot;
+    const data = event.item.data;
 
-    this.api.moveSlot(slot.id, day).subscribe(() => this.load());
+    if ('frequencyPerWeek' in data) {
+      const habit = data as Habit;
+      this.api.addHabit(habit.id, day).subscribe(() => this.load());
+    } else {
+      const slot = data as ScheduleSlot;
+      this.api.moveSlot(slot.id, day).subscribe(() => this.load());
+    }
   }
 
   getStatusColor(status: number): string {
-    if (status === 1) return "#22C55E";
-    if (status === 2) return "#ef4444";
-    return "#3B82F6";
+    if (status === 1) return '#22C55E';
+    if (status === 2) return '#ef4444';
+    return '#3B82F6';
   }
 
   formatTime(time: string): string {
@@ -93,6 +104,7 @@ export class Schedule implements OnInit {
     return dateObject.toLocaleTimeString(navigator.language, {
       hour: 'numeric',
       minute: '2-digit',
-      hour12: true});
+      hour12: true,
+    });
   }
 }

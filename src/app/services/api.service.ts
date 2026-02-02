@@ -53,6 +53,10 @@ export class ApiService {
     return this.http.post<void>(`${this.baseUrl}/schedule/${slotId}/move`, { day });
   }
 
+  addHabit(habitId: number, day: string): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/schedule/habit/${habitId}`, { day });
+  }
+
   deleteSlot(slotId: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/schedule/${slotId}`);
   }

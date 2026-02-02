@@ -1,14 +1,19 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CdkDropList, CdkDrag } from '@angular/cdk/drag-drop';
 import { ApiService } from '../../services/api.service';
 import { Habit } from '../../models/habit.model';
+import { LucideAngularModule, Target, Trash, AlarmClockPlus} from 'lucide-angular';
 
 @Component({
   selector: 'app-habits',
-  imports: [FormsModule],
+  imports: [FormsModule, CdkDropList, CdkDrag, LucideAngularModule],
   templateUrl: './habits.html',
 })
 export class Habits implements OnInit {
+  readonly Target = Target;
+  readonly Trash = Trash;
+  readonly AlarmClockPlus = AlarmClockPlus;
   loading = signal<boolean>(true);
   habits = signal<Habit[]>([]);
 

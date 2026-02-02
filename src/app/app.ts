@@ -1,11 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { Habits } from './components/habits/habits';
 import { Schedule } from './components/schedule/schedule';
+import { CdkDropListGroup } from '@angular/cdk/drag-drop';
 import { LucideAngularModule, Sun, Moon} from 'lucide-angular';
 
 @Component({
   selector: 'app-root',
-  imports: [Habits, Schedule, LucideAngularModule],
+  imports: [Habits, Schedule, CdkDropListGroup, LucideAngularModule],
   templateUrl: './app.html',
 })
 export class App {

@@ -1,24 +1,26 @@
-<div
-  class="min-h-screen bg-stone-100 dark:bg-stone-900 text-stone-800 dark:text-stone-100 transition-colors">
+<div class="min-h-screen bg-stone-100 dark:bg-stone-900 text-stone-800 dark:text-stone-100 transition-colors">
 
-  <header class="flex justify-between items-center px-6 py-4 border-b border-stone-200 dark:border-stone-700">
-    <div class="flex justify-between items-center">
-        <img width="32" height="32" src="scheduler.svg" alt="App icon"/>
-        <h1 class="text-xl font-semibold px-2">Habit Scheduler</h1>
+  <header class="sticky backdrop-blur-sm top-0 z-40 bg-white/80 dark:bg-stone-900/80 border-b border-stone-200 dark:border-stone-700">
+    <div class="container-center mx-auto flex items-center justify-between gap-4 px-4 py-3">
+      <div class="flex items-center gap-3">
+        <img width="36" height="36" src="scheduler.svg" alt="App icon"/>
+        <h1 class="text-xl font-semibold text-stone-900 dark:text-stone-100">Habit Scheduler</h1>
+      </div>
+
+      <div class="flex items-center gap-2">
+
+        <button aria-label="Toggle theme" (click)="toggleTheme()" class="p-2 rounded-md hover:bg-stone-100 dark:hover:bg-stone-700">
+          @if (dark()) {
+            <lucide-icon [img]="Sun" class="h-6 w-6 text-yellow-300"></lucide-icon>
+          } @else {
+            <lucide-icon [img]="Moon" class="h-6 w-6 text-stone-700 dark:text-stone-200"></lucide-icon>
+          }
+        </button>
+      </div>
     </div>
-
-    <button
-      class="text-sm px-3 py-1 rounded-md border hover:bg-stone-200 dark:hover:bg-stone-700"
-      (click)="toggleTheme()">
-      @if (dark()) {
-        <lucide-icon [img]="Sun" class="my-icon h-6 w-6 text-yellow-300"></lucide-icon>
-      } @else {
-        <lucide-icon [img]="Moon" class="my-icon h-6 w-6 text-blue-900"></lucide-icon>
-      }
-    </button>
   </header>
 
-  <main class="p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+  <main cdkDropListGroup class="px-4 mx-auto p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
     <app-habits />
     <app-schedule class="lg:col-span-3" />
   </main>
