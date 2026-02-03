@@ -1,59 +1,105 @@
-# HabitSchedulerUi
+# Habit Scheduler UI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+A clean, modern frontend for my constraint-based habit scheduling application.  
+Built with **Angular**, **TypeScript**, and **Tailwind CSS v4**.
 
-## Development server
+The UI allows users to:
+- View habits and weekly schedules
+- Track completion and missed habits
+- Drag & drop habits into time slots
+- Navigate between weeks
+- Interact with a REST API backend
 
-To start a local development server, run:
+---
 
+## Tech Stack
+
+- **Angular**
+- **TypeScript**
+- **Tailwind CSS v4**
+- **RxJS**
+- **Netlify** (deployment)
+
+---
+
+## Features
+
+- Habit list with frequency display
+- Weekly schedule view
+- Slot status indicators (Scheduled / Completed / Missed)
+- Disabled actions for invalid states
+- Drag & drop scheduling
+- Skeleton loading states
+- Dark theme support
+
+---
+
+## Component Structure
+
+src/app/
+components/
+habits/
+schedule/
+calendar/
+services/
+api.service.ts
+models/
+habit.model.ts
+schedule-slot.model.ts
+
+
+---
+
+## Backend Integration
+
+Uses an ASP.NET Core REST API.
+
+Environment-based configuration:
+
+- `environment.ts` → local development
+- `environment.prod.ts` → production
+
+Example:
+
+```ts
+export const environment = {
+  production: true,
+  apiBaseUrl: 'https://habitscheduler.onrender.com/api'
+};
+```
+## Local Development
+Prerequisites
+Node.js (18+ recommended)
+
+Angular CLI
+
+Setup
+```bash
+git clone https://github.com/your-username/habit-scheduler-frontend.git
+cd habit-scheduler-frontend
+npm install
+```
+Run the dev server:
 ```bash
 ng serve
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+App will be available at:
 ```bash
-ng generate component component-name
+http://localhost:4200
+```
+## Styling
+- Tailwind CSS v4
+- Utility-first styling
+- Dark theme applied at root level
+- Skeleton loaders for async data
+
+## Deployment
+Deployed on Netlify at:
+```bash
+https://habit-scheduler.netlify.app/
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Automatically builds using:
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
 ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Uses environment.prod.ts for API URLs
